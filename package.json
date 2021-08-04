@@ -1,11 +1,11 @@
 {
     "private": true,
-    "name": "docker-build-action",
+    "name": "docker-build-push-action",
     "version": "0.0.0-semantically-released",
     "author": {
       "name": "RekGRpth",
       "email": "RekGRpth@gmail.com",
-      "url": "https://github.com/RekGRpth/docker-build-action"
+      "url": "https://github.com/RekGRpth/docker-build-push-action"
     },
     "license": "MIT",
     "dependencies": {

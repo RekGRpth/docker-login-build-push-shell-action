@@ -1,16 +1,16 @@
-name: docker build
-description: docker build
+name: docker build push
+description: docker build push
 author: RekGRpth
 inputs:
   image:
-    description: docker build image
+    description: docker build push image
   registry:
-    description: docker build registry
+    description: docker build push registry
     default: ghcr.io
   tag:
-    description: docker build tag
+    description: docker build push tag
   username:
-    description: docker build username
+    description: docker build push username
     default: ${{ github.repository_owner }}
 runs:
   using: composite
