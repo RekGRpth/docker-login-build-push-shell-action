@@ -1,16 +1,19 @@
-name: docker build push action
-description: docker build push action
+name: docker login build push action
+description: docker login build push action
 author: RekGRpth
 inputs:
   image:
     description: docker build push image
+  password:
+    description: docker login password
+    default: ${{ github.token }}
   registry:
     description: docker build push registry
     default: ghcr.io
   tag:
     description: docker build push tag
   username:
-    description: docker build push username
+    description: docker login build push username
     default: ${{ github.repository_owner }}
 runs:
   using: composite
@@ -20,6 +23,7 @@ runs:
         INPUTS_IMAGE="${{ inputs.image }}"
         INPUTS_TAG="${{ inputs.tag }}"
         REGISTRY_USERNAME_IMAGE_TAG="$(echo "${{ inputs.registry }}/${{ inputs.username }}/${INPUTS_IMAGE:-${GITHUB_REPOSITORY##*/}}:${INPUTS_TAG:-${GITHUB_REF##*/}}" | tr '[:upper:]' '[:lower:]')"
+        docker login --username "${{ inputs.username }}" --password "${{ inputs.password }}" "${{ inputs.registry }}"
         docker build --progress=plain --tag "${REGISTRY_USERNAME_IMAGE_TAG}" .
         docker push "${REGISTRY_USERNAME_IMAGE_TAG}"
       shell: sh
