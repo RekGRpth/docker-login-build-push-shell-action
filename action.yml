@@ -20,10 +20,8 @@ runs:
         GITHUB_BRANCH="${GITHUB_REF##*/}"
         GITHUB_REPOSITORY_NAME="${GITHUB_REPOSITORY##*/}"
         INPUTS_IMAGE="${{ inputs.image }}"
-        INPUTS_REGISTRY="${{ inputs.registry }}"
         INPUTS_TAG="${{ inputs.tag }}"
-        INPUTS_USERNAME="${{ inputs.username }}"
-        REGISTRY_USERNAME_IMAGE_TAG="$(echo "${INPUTS_REGISTRY}/${INPUTS_USERNAME}/${INPUTS_IMAGE:-${GITHUB_REPOSITORY_NAME}}:${INPUTS_TAG:-${GITHUB_BRANCH}}" | tr '[:upper:]' '[:lower:]')"
+        REGISTRY_USERNAME_IMAGE_TAG="$(echo "${{ inputs.registry }}/${{ inputs.username }}/${INPUTS_IMAGE:-${GITHUB_REPOSITORY_NAME}}:${INPUTS_TAG:-${GITHUB_BRANCH}}" | tr '[:upper:]' '[:lower:]')"
         docker build --progress=plain --tag "${REGISTRY_USERNAME_IMAGE_TAG}" .
         docker push "${REGISTRY_USERNAME_IMAGE_TAG}"
       shell: sh
