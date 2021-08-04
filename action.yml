@@ -25,4 +25,5 @@ runs:
         INPUTS_USERNAME="${{ inputs.username }}"
         REGISTRY_USERNAME_IMAGE_TAG="$(echo "${INPUTS_REGISTRY}/${INPUTS_USERNAME}/${INPUTS_IMAGE:-${GITHUB_REPOSITORY_NAME}}:${INPUTS_TAG:-${GITHUB_BRANCH}}" | tr '[:upper:]' '[:lower:]')"
         docker build --progress=plain --tag "${REGISTRY_USERNAME_IMAGE_TAG}" .
+        docker push "${REGISTRY_USERNAME_IMAGE_TAG}"
       shell: sh
