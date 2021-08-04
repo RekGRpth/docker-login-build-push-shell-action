@@ -1,5 +1,5 @@
-name: docker build push
-description: docker build push
+name: docker build push action
+description: docker build push action
 author: RekGRpth
 inputs:
   image:
