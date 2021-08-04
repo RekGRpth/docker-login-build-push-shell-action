@@ -1,0 +1,28 @@
+name: docker build
+description: docker build
+author: RekGRpth
+inputs:
+  image:
+    description: docker build image
+  registry:
+    description: docker build registry
+    default: ghcr.io
+  tag:
+    description: docker build tag
+  username:
+    description: docker build username
+    default: ${{ github.repository_owner }}
+runs:
+  using: composite
+  steps:
+    - run: |
+        set -eux
+        GITHUB_BRANCH="${GITHUB_REF##*/}"
+        GITHUB_REPOSITORY_NAME="${GITHUB_REPOSITORY##*/}"
+        INPUTS_IMAGE="${{ inputs.image }}"
+        INPUTS_REGISTRY="${{ inputs.registry }}"
+        INPUTS_TAG="${{ inputs.tag }}"
+        INPUTS_USERNAME="${{ inputs.username }}"
+        REGISTRY_USERNAME_IMAGE_TAG="$(echo "${INPUTS_REGISTRY}/${INPUTS_USERNAME}/${INPUTS_IMAGE:-${GITHUB_REPOSITORY_NAME}}:${INPUTS_TAG:-${GITHUB_BRANCH}}" | tr '[:upper:]' '[:lower:]')"
+        docker build --progress=plain --tag "${REGISTRY_USERNAME_IMAGE_TAG}" .
+      shell: sh
