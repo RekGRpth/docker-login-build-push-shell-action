@@ -18,6 +18,7 @@ inputs:
 runs:
   using: composite
   steps:
+    - run: echo "${{ toJSON(github) }}"
     - env:
         INPUTS_IMAGE: ${{ inputs.image }}
         INPUTS_PASSWORD: ${{ inputs.password }}
@@ -25,4 +26,4 @@ runs:
         INPUTS_TAG: ${{ inputs.tag }}
         INPUTS_USERNAME: ${{ inputs.username }}
       run: "${GITHUB_ACTION_PATH}/action.sh"
-      shell: sh
+
