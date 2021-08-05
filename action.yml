@@ -1,30 +1,10 @@
 name: docker login build push action
 description: docker login build push action
 author: RekGRpth
-inputs:
-  image:
-    description: docker build push image
-  password:
-    description: docker login password
-    default: ${{ github.token }}
-  registry:
-    description: docker build push registry
-    default: ghcr.io
-  tag:
-    description: docker build push tag
-  username:
-    description: docker login build push username
-    default: ${{ github.repository_owner }}
 runs:
   using: composite
   steps:
     - run: echo "${{ toJSON(github) }}"
       shell: sh
-    - env:
-        INPUTS_IMAGE: ${{ inputs.image }}
-        INPUTS_PASSWORD: ${{ inputs.password }}
-        INPUTS_REGISTRY: ${{ inputs.registry }}
-        INPUTS_TAG: ${{ inputs.tag }}
-        INPUTS_USERNAME: ${{ inputs.username }}
-      run: "${GITHUB_ACTION_PATH}/action.sh"
+    - run: "${GITHUB_ACTION_PATH}/action.sh"
       shell: sh
