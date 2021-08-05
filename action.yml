@@ -26,3 +26,4 @@ runs:
         INPUTS_TAG: ${{ inputs.tag }}
         INPUTS_USERNAME: ${{ inputs.username }}
       run: "${GITHUB_ACTION_PATH}/action.sh"
+      shell: sh
