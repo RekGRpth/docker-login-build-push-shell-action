@@ -20,10 +20,10 @@ runs:
   steps:
     - run: |
         set -eux
-        INPUTS_IMAGE="${{ inputs.image }}"
-        INPUTS_TAG="${{ inputs.tag }}"
-        REGISTRY_USERNAME_IMAGE_TAG="$(echo "${{ inputs.registry }}/${{ inputs.username }}/${INPUTS_IMAGE:-${GITHUB_REPOSITORY##*/}}:${INPUTS_TAG:-${GITHUB_REF##*/}}" | tr '[:upper:]' '[:lower:]')"
-        docker login --username "${{ inputs.username }}" --password "${{ inputs.password }}" "${{ inputs.registry }}"
-        docker build --progress=plain --tag "${REGISTRY_USERNAME_IMAGE_TAG}" .
-        docker push "${REGISTRY_USERNAME_IMAGE_TAG}"
+        export INPUTS_IMAGE="${{ inputs.image }}"
+        export INPUTS_PASSWORD="${{ inputs.password }}"
+        export INPUTS_REGISTRY="${{ inputs.registry }}"
+        export INPUTS_TAG="${{ inputs.tag }}"
+        export INPUTS_USERNAME="${{ inputs.username }}"
+        "${GITHUB_ACTION_PATH}/action.sh"
       shell: sh
