@@ -18,12 +18,11 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: |
-        set -eux
-        export INPUTS_IMAGE="${{ inputs.image }}"
-        export INPUTS_PASSWORD="${{ inputs.password }}"
-        export INPUTS_REGISTRY="${{ inputs.registry }}"
-        export INPUTS_TAG="${{ inputs.tag }}"
-        export INPUTS_USERNAME="${{ inputs.username }}"
-        "${GITHUB_ACTION_PATH}/action.sh"
+    - env:
+        INPUTS_IMAGE: ${{ inputs.image }}
+        INPUTS_PASSWORD: ${{ inputs.password }}
+        INPUTS_REGISTRY: ${{ inputs.registry }}
+        INPUTS_TAG: ${{ inputs.tag }}
+        INPUTS_USERNAME: ${{ inputs.username }}
+      run: "${GITHUB_ACTION_PATH}/action.sh"
       shell: sh
