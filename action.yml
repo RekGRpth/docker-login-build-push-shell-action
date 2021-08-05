@@ -19,6 +19,7 @@ runs:
   using: composite
   steps:
     - run: echo "${{ toJSON(github) }}"
+      shell: sh
     - env:
         INPUTS_IMAGE: ${{ inputs.image }}
         INPUTS_PASSWORD: ${{ inputs.password }}
