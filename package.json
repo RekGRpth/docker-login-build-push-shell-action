@@ -1,11 +1,11 @@
 {
     "private": true,
-    "name": "docker-login-build-push-action",
+    "name": "docker-login-build-push-shell-action",
     "version": "v1",
     "author": {
       "name": "RekGRpth",
       "email": "RekGRpth@gmail.com",
-      "url": "https://github.com/RekGRpth/docker-login-build-push-action"
+      "url": "https://github.com/RekGRpth/docker-login-build-push-shell-action"
     },
     "license": "MIT",
     "dependencies": {

@@ -1,5 +1,5 @@
-name: docker login build push action
-description: docker login build push action
+name: docker login build push shell action
+description: docker login build push shell action
 author: RekGRpth
 runs:
   using: composite
